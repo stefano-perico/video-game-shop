@@ -1,1 +1,26 @@
-<p>signin works!</p>
+<form class="form-signin" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+
+  <img class="mb-4" src="#" alt="" width="72" height="72">
+
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+  <label for="email" class="sr-only">Email address</label>
+  <input type="email"
+         id="email"
+         class="form-control"
+         placeholder="Email address"
+         formControlName="email"
+         required autofocus>
+
+  <label for="password" class="sr-only">Password</label>
+  <input type="password"
+         id="password"
+         class="form-control"
+         placeholder="Password"
+         formControlName="password"
+         required>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="signinForm.invalid">Sign in</button>
+</form>
+
+<p class="text-danger">{{ errorMessage }}</p>
