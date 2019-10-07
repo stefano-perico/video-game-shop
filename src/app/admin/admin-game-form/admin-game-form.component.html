@@ -1,1 +1,43 @@
-<p>admin-game-form works!</p>
+<form [formGroup]="gameForm" (ngSubmit)="onSaveGame()">
+  <div class="form-group">
+    <label for="name">Nom</label>
+    <input type="text"
+           id="name"
+           formControlName="name"
+           class="form-control"
+           required>
+
+  </div>
+
+  <div class="form-group">
+    <label for="author">Auteur</label>
+    <input type="text"
+           id="author"
+           formControlName="author"
+           class="form-control"
+           required>
+
+  </div>
+
+  <div class="form-group">
+    <label for="price">Nom</label>
+    <input type="number"
+           id="price"
+           formControlName="price"
+           class="form-control"
+           required>
+
+  </div>
+
+  <div class="form-group">
+    <label for="synopsis">Nom</label>
+    <input type="text"
+           id="synopsis"
+           formControlName="synopsis"
+           class="form-control">
+
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="gameForm.invalid">Enregistrer</button>
+
+</form>
