@@ -12,6 +12,9 @@ import {Game} from '../../models/game.model';
 export class AdminGameFormComponent implements OnInit {
 
   gameForm: FormGroup;
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +30,7 @@ export class AdminGameFormComponent implements OnInit {
     this.gameForm = this.formBuilder.group({
       name: ['', Validators.required],
       author: ['', Validators.required],
-      price: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      price: ['', [Validators.required, Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]],
       synopsis: ''
     });
   }
@@ -37,12 +40,30 @@ export class AdminGameFormComponent implements OnInit {
     const author = this.gameForm.get('author').value;
     const price = this.gameForm.get('price').value;
     const synopsis = this.gameForm.get('synopsis').value;
-
     const newGame = new Game(name, author, price);
     newGame.synopsis = synopsis;
+    if (this.fileUrl && this.fileUrl !== '') {
+      newGame.image = this.fileUrl;
+    }
 
     this.gamesService.createNewGames(newGame);
     this.router.navigate(['/admin', 'books']);
+  }
+
+  uploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.gamesService.uploadFile(file)
+      .then(
+        (url: string) => {
+          this.fileUrl = url;
+          this.fileIsUploading = false;
+          this.fileUploaded = true;
+        }
+      );
+  }
+
+  detectFile(event) {
+    this.uploadFile(event.target.files[0]);
   }
 
 }

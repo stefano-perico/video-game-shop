@@ -1,10 +1,21 @@
-<div class="card-deck mb-3 text-center" *ngFor="let game of games; let i = index">
-  <a (click)="onViewBook(i)" class="card mb-4 shadow-sm">
-    <div class="card-header">
-      <h4 class="my-0 font-weight-normal">{{ game.name }}</h4>
+<h1 class="text-white my-5 text-center">Liste des jeux</h1>
+<div class="row">
+  <div class="col-lg-4 col-sm-6 col-12 mb-4" *ngFor="let game of games; let i = index">
+    <div class="card">
+      <a (click)="onViewBook(i)" >
+        <img *ngIf="game.image" [src]="game.image" alt="Avatar" style="width:100%">
+        <i *ngIf="!game.image" class="fas fa-gamepad fa-3x"></i>
+      </a>
+      <div class="price">
+        <span >{{ game.price }} €</span>
+      </div>
+      <div class="container">
+        <h4><a (click)="onViewBook(i)">{{ game.name }}</a></h4>
+        <p>{{ game.author }}</p>
+      </div>
     </div>
-    <div class="card-body">
-      <h1 class="card-title pricing-card-title">{{ game.price | currency }} <small class="text-muted">/ mo</small></h1>
-    </div>
-  </a>
+  </div>
 </div>
+
+
+

@@ -14,7 +14,7 @@ export class AppComponent {
       authDomain: 'games-dc9ca.firebaseapp.com',
       databaseURL: 'https://games-dc9ca.firebaseio.com',
       projectId: 'games-dc9ca',
-      storageBucket: '',
+      storageBucket: 'games-dc9ca.appspot.com',
       messagingSenderId: '980253627541',
       appId: '1:980253627541:web:7d75b44b63bb9070ee779c'
     };

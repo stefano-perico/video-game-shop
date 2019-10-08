@@ -1,6 +1,8 @@
-<article>
+<article class="text-white text-center">
   <h1>{{ game.name }}</h1>
   <h3>{{ game.author }}</h3>
-  <p>{{ game.synopsis }}</p>
-  <button class="btn btn-default" (click)="onBack()">Revenir à la liste des jeux</button>
+  <img *ngIf="game.image" [src]="game.image" alt="image-of-{{ game.name }}">
+  <p *ngIf="game.synopsis">{{ game.synopsis }}</p>
+  <br>
+  <button class="btn btn-light my-3" (click)="onBack()">Revenir à la liste des jeux</button>
 </article>

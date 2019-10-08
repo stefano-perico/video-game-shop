@@ -31,7 +31,7 @@ export class AdminGameListComponent implements OnInit, OnDestroy {
   }
 
   onNewGame() {
-    this.router.navigate(['/admin', 'new']);
+    this.router.navigate(['/admin', 'games', 'new']);
   }
 
   onDeleteGame(game: Game) {
@@ -43,7 +43,7 @@ export class AdminGameListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.gamesService.gamesSubject.unsubscribe();
+    this.gamesSubscription.unsubscribe();
   }
 
 }

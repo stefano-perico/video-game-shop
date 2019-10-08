@@ -52,6 +52,17 @@ export class GamesService {
   }
 
   removeGame(game: Game) {
+    if (game.image) {
+      const storageRef = firebase.storage().refFromURL(game.image);
+      storageRef.delete()
+        .then(
+          () => console.log('Image supprimé')
+        )
+        .catch(
+          (error) => console.log(`Image non trouvée : ${error}`)
+        );
+    }
+
     const gameIndexToRemove = this.games.findIndex(
       (gameElement) => {
         if (gameElement === game) {
@@ -60,8 +71,29 @@ export class GamesService {
       }
     );
 
-    this.games.splice(gameIndexToRemove, 1);
-    this.saveGames();
-    this.emitGames();
+    if (confirm(`voulez-vous vraiment supprimer ${game.name} ?`)) {
+      this.games.splice(gameIndexToRemove, 1);
+      this.saveGames();
+      this.emitGames();
+    }
+  }
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const createUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child(`images/${createUniqueFileName}${file.name}`).put(file);
+
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+            () => console.log(`Chargement de ${file.name}`),
+            (error) => {
+              console.log(`Erreur de chargement : ${error}`);
+              reject();
+            },
+          () => resolve(upload.snapshot.ref.getDownloadURL())
+          );
+      }
+    );
   }
 }

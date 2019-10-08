@@ -1,4 +1,4 @@
-<form [formGroup]="gameForm" (ngSubmit)="onSaveGame()">
+<form [formGroup]="gameForm" (ngSubmit)="onSaveGame()" class="text-white">
   <div class="form-group">
     <label for="name">Nom</label>
     <input type="text"
@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-group">
-    <label for="price">Nom</label>
+    <label for="price">Prix de vente</label>
     <input type="number"
            id="price"
            formControlName="price"
@@ -30,14 +30,20 @@
   </div>
 
   <div class="form-group">
-    <label for="synopsis">Nom</label>
-    <input type="text"
+    <label for="synopsis">Synopsis</label>
+    <textarea type="text"
            id="synopsis"
            formControlName="synopsis"
            class="form-control">
-
+    </textarea>
   </div>
 
-  <button class="btn btn-primary" type="submit" [disabled]="gameForm.invalid">Enregistrer</button>
+  <div class="form-group">
+    <h3>Ajouter une image</h3>
+    <input type="file" (change)="detectFile($event)" class="form-control" accept="image/*">
+    <p class="text-success" *ngIf="fileUploaded">Le fichier est chargé.</p>
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="gameForm.invalid || fileIsUploading">Enregistrer</button>
 
 </form>
