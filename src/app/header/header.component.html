@@ -6,12 +6,12 @@
   </nav>
 
   <div *ngIf="!isAuth">
-    <a class="btn btn-outline-primary mx-1" routerLink="auth/signup">Sign up</a>
-    <a class="btn btn-outline-success mx-1" routerLink="auth/signin">Sign in</a>
+    <a class="btn btn-outline-primary mx-1" routerLink="auth/signup">Créer un compte</a>
+    <a class="btn btn-outline-success mx-1" routerLink="auth/signin">Connexion</a>
   </div>
 
   <div *ngIf="isAuth">
-    <a class="btn btn-outline-secondary mx-1" (click)="onSignOut()" >Sign out</a>
+    <a class="btn btn-outline-secondary mx-1" (click)="onSignOut()" >Déconnexion</a>
   </div>
 
 </div>

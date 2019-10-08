@@ -2,9 +2,9 @@
 
   <img class="mb-4" src="#" alt="" width="72" height="72">
 
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <h1 class="h3 mb-3 font-weight-normal">Page de connexion</h1>
 
-  <label for="email" class="sr-only">Email address</label>
+  <label for="email" class="sr-only">Email</label>
   <input type="email"
          id="email"
          class="form-control"
@@ -20,7 +20,7 @@
          formControlName="password"
          required>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="signinForm.invalid">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="signinForm.invalid">Connexion</button>
 </form>
 
 <p class="text-danger">{{ errorMessage }}</p>
