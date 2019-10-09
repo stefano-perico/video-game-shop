@@ -34,6 +34,10 @@ export class AdminGameListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin', 'games', 'new']);
   }
 
+  onEditGame(id: number) {
+    this.router.navigate(['/admin', 'games', 'edit', id]);
+  }
+
   onDeleteGame(game: Game) {
     this.gamesService.removeGame(game);
   }

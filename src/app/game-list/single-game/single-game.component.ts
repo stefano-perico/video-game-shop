@@ -12,7 +12,6 @@ import * as firebase from 'firebase';
 export class SingleGameComponent implements OnInit {
 
   game: Game;
-  isAuth: boolean;
 
   constructor(
     private router: Router,
@@ -28,18 +27,10 @@ export class SingleGameComponent implements OnInit {
       .then(
         (game: Game) => this.game = game
       );
-
-    firebase.auth().onAuthStateChanged(
-      (user) => user ? this.isAuth = true : this.isAuth = false
-    );
   }
 
   onBack() {
     this.router.navigate(['/games']);
-  }
-
-  onDeleteGame(game: Game) {
-    this.gamesService.removeGame(game);
   }
 
 }

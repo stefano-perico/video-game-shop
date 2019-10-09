@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Game} from '../models/game.model';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import DataSnapshot = firebase.database.DataSnapshot;
 import * as firebase from 'firebase';
 
@@ -47,6 +47,12 @@ export class GamesService {
 
   createNewGames(game: Game) {
     this.games.push(game);
+    this.saveGames();
+    this.emitGames();
+  }
+
+  updateGame(id: number, game: Game) {
+    this.games.splice(id, 1, game);
     this.saveGames();
     this.emitGames();
   }

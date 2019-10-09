@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GamesService} from '../../services/games.service';
 import {Game} from '../../models/game.model';
 
@@ -15,14 +15,23 @@ export class AdminGameFormComponent implements OnInit {
   fileIsUploading = false;
   fileUrl: string;
   fileUploaded = false;
+  game: Game;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.game = new Game('', '', null);
+    const id = this.route.snapshot.params.id;
+
+    this.gamesService.getSingleGame(+id)
+      .then(
+        (game: Game) => this.game = game
+      );
     this.initForm();
   }
 
@@ -31,7 +40,8 @@ export class AdminGameFormComponent implements OnInit {
       name: ['', Validators.required],
       author: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]],
-      synopsis: ''
+      synopsis: '',
+      image: ''
     });
   }
 
@@ -65,5 +75,8 @@ export class AdminGameFormComponent implements OnInit {
   detectFile(event) {
     this.uploadFile(event.target.files[0]);
   }
+
+
+
 
 }

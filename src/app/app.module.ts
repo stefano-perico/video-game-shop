@@ -15,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthGuardService} from './services/auth-guard.service';
 import {GamesService} from './services/games.service';
 import {AuthService} from './services/auth.service';
+import { AdminGameEditComponent } from './admin/admin-game-edit/admin-game-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import {AuthService} from './services/auth.service';
     GameListComponent,
     SingleGameComponent,
     AdminGameListComponent,
-    AdminGameFormComponent
+    AdminGameFormComponent,
+    AdminGameEditComponent,
+
   ],
   imports: [
     BrowserModule,
